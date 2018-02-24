@@ -1,12 +1,13 @@
 (ns crate.core
   (:require [goog.dom :as gdom]
+            [goog.string]
             [crate.compiler :as compiler]
-            [crate.util :as util])) 
+            [crate.util :as util]))
 
 (def group-id (atom 0))
 
 (defn raw [html-str]
-  (gdom/htmlToDocumentFragment html-str)) 
+  (gdom/constHtmlToNode (goog.string/Const.from html-str)))
 
 (defn html [& tags]
   (let [res (map compiler/elem-factory tags)]
